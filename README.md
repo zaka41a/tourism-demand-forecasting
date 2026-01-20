@@ -1,6 +1,10 @@
+<div align="center">
+   
 # 🌍 Tourism Demand Forecasting
 
 ![Status](https://img.shields.io/badge/Status-In_Progress-yellow) ![Python](https://img.shields.io/badge/Python-3.12-blue) ![Libraries](https://img.shields.io/badge/Libraries-Pandas%20|%20NumPy%20|%20Scikit-learn%20|%20Matplotlib%20|%20Streamlit-orange)
+
+</div>
 
 ---
 
