@@ -95,7 +95,7 @@ The dataset includes the following columns:
 
 ---
 
-## 🔮 Next Steps
+## ✅ Next Steps
 
 - Expand dataset: more locations, longer periods ⏳  
 - Use advanced AI models (e.g., **LSTM for time series**) 📊  
