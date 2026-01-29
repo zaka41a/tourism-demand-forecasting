@@ -1,28 +1,101 @@
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
 venv/
 env/
-*.sqlite3
+ENV/
+env.bak/
+venv.bak/
+.venv
 
-# Jupyter
+# Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb_checkpoints/
 
-# Spring Boot / Java
-/target/
-/build/
-*.class
-*.jar
-*.war
-
-# IDE
+# PyCharm
 .idea/
 *.iml
 *.ipr
 *.iws
 
+# VSCode
+.vscode/
+*.code-workspace
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# Data files (keep structure, ignore large files)
+data/raw/*.csv
+data/processed/*.csv
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Models (trained models can be large)
+models/*.pkl
+models/*.joblib
+models/*.h5
+!models/.gitkeep
+
+# Logs
+logs/*.log
+*.log
+!logs/.gitkeep
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
