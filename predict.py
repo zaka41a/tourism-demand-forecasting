@@ -18,12 +18,25 @@ from config import MODEL_SAVE_PATH
 
 def predict_single(model, temperature, is_holiday, price, month, day_of_week):
     """Make a single prediction."""
+    import numpy as np
+
+    # Create input with all required features
     input_data = pd.DataFrame({
         "temperature": [temperature],
         "is_holiday": [is_holiday],
         "price": [price],
         "month": [month],
-        "day_of_week": [day_of_week]
+        "day_of_week": [day_of_week],
+        "quarter": [(month - 1) // 3 + 1],
+        "is_weekend": [1 if day_of_week >= 5 else 0],
+        "week_of_year": [1],  # Default value
+        "month_sin": [np.sin(2 * np.pi * month / 12)],
+        "month_cos": [np.cos(2 * np.pi * month / 12)],
+        "day_sin": [np.sin(2 * np.pi * day_of_week / 7)],
+        "day_cos": [np.cos(2 * np.pi * day_of_week / 7)],
+        "bookings_lag_7": [100],  # Assumed value (historical avg)
+        "bookings_lag_30": [100],  # Assumed value (historical avg)
+        "bookings_rolling_7": [100]  # Assumed value (historical avg)
     })
 
     prediction = model.predict(input_data)[0]

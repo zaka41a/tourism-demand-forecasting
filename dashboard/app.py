@@ -46,6 +46,19 @@ st.markdown("""
         padding: 1rem;
         border-radius: 10px;
     }
+    /* Force metric labels and values to be dark/visible */
+    .stMetric label {
+        color: #1E3A5F !important;
+        font-weight: 600 !important;
+    }
+    .stMetric [data-testid="stMetricValue"] {
+        color: #262730 !important;
+        font-size: 1.8rem !important;
+        font-weight: 700 !important;
+    }
+    .stMetric [data-testid="stMetricDelta"] {
+        color: #0e1117 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
