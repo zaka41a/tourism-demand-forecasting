@@ -361,7 +361,7 @@ Contributors will be:
 ## ❓ Questions?
 
 - Open an issue with the `question` label
-- Email: your.email@example.com
+- Email: zaksab98@gmail.com
 
 ## 📖 Resources
 
