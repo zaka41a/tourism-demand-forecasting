@@ -287,8 +287,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 **Built with ❤️ by zaka41a**
 
 - GitHub: [@zaka41a](https://github.com/zaka41a)
-- Project Version: 2.0 - Enhanced Edition
-- Last Updated: January 2025
+
 
 ---
 
