@@ -37,12 +37,17 @@ def load_and_clean_data(path):
         df["day_sin"] = np.sin(2 * np.pi * df["day_of_week"] / 7)
         df["day_cos"] = np.cos(2 * np.pi * df["day_of_week"] / 7)
 
-        # Lag features (if sufficient data)
+        # Lag features (only add windows that leave enough usable rows)
+        lag_columns = []
         if len(df) > 7:
             df["bookings_lag_7"] = df["bookings"].shift(7)
-            df["bookings_lag_30"] = df["bookings"].shift(30)
             df["bookings_rolling_7"] = df["bookings"].rolling(window=7).mean()
-            df = df.dropna()  # Remove rows with NaN from lag features
+            lag_columns.extend(["bookings_lag_7", "bookings_rolling_7"])
+        if len(df) > 37:
+            df["bookings_lag_30"] = df["bookings"].shift(30)
+            lag_columns.append("bookings_lag_30")
+        if lag_columns:
+            df = df.dropna(subset=lag_columns)
 
         logger.info(f"Feature engineering completed. Shape: {df.shape}")
 
