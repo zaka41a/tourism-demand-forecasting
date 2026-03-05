@@ -10,7 +10,7 @@ import os
 from datetime import datetime, timedelta
 
 # Add src directory to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from src.data_preprocessing import load_and_clean_data, scale_features
 
@@ -21,13 +21,15 @@ class TestDataPreprocessing(unittest.TestCase):
     def setUp(self):
         """Create sample test data."""
         dates = pd.date_range(start="2023-01-01", end="2023-01-31", freq="D")
-        self.test_df = pd.DataFrame({
-            "date": dates,
-            "bookings": np.random.randint(50, 200, len(dates)),
-            "temperature": np.random.randint(10, 30, len(dates)),
-            "is_holiday": np.random.choice([0, 1], len(dates)),
-            "price": np.random.randint(70, 120, len(dates))
-        })
+        self.test_df = pd.DataFrame(
+            {
+                "date": dates,
+                "bookings": np.random.randint(50, 200, len(dates)),
+                "temperature": np.random.randint(10, 30, len(dates)),
+                "is_holiday": np.random.choice([0, 1], len(dates)),
+                "price": np.random.randint(70, 120, len(dates)),
+            }
+        )
 
         # Save test data
         os.makedirs("data/test", exist_ok=True)
@@ -72,9 +74,7 @@ class TestDataPreprocessing(unittest.TestCase):
 
         numerical_features = ["temperature", "price"]
 
-        X_train_scaled, X_test_scaled, scaler = scale_features(
-            X_train, X_test, numerical_features
-        )
+        X_train_scaled, X_test_scaled, scaler = scale_features(X_train, X_test, numerical_features)
 
         # Check if scaling was applied
         self.assertIsNotNone(scaler)

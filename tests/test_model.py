@@ -9,7 +9,7 @@ import sys
 import os
 
 # Add src directory to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from src.model import train_model, get_feature_columns, save_model, load_model
 from src.evaluation import evaluate_model
@@ -22,18 +22,20 @@ class TestModel(unittest.TestCase):
         """Create sample test data."""
         dates = pd.date_range(start="2023-01-01", end="2023-12-31", freq="D")
         n = len(dates)
-        self.test_df = pd.DataFrame({
-            "date": dates,
-            "bookings": np.random.randint(50, 200, n),
-            "temperature": np.random.randint(10, 30, n),
-            "is_holiday": np.random.choice([0, 1], n),
-            "price": np.random.randint(70, 120, n),
-            "month": pd.DatetimeIndex(dates).month,
-            "day_of_week": pd.DatetimeIndex(dates).dayofweek,
-            "quarter": pd.DatetimeIndex(dates).quarter,
-            "is_weekend": (pd.DatetimeIndex(dates).dayofweek >= 5).astype(int),
-            "week_of_year": pd.DatetimeIndex(dates).isocalendar().week.values
-        })
+        self.test_df = pd.DataFrame(
+            {
+                "date": dates,
+                "bookings": np.random.randint(50, 200, n),
+                "temperature": np.random.randint(10, 30, n),
+                "is_holiday": np.random.choice([0, 1], n),
+                "price": np.random.randint(70, 120, n),
+                "month": pd.DatetimeIndex(dates).month,
+                "day_of_week": pd.DatetimeIndex(dates).dayofweek,
+                "quarter": pd.DatetimeIndex(dates).quarter,
+                "is_weekend": (pd.DatetimeIndex(dates).dayofweek >= 5).astype(int),
+                "week_of_year": pd.DatetimeIndex(dates).isocalendar().week.values,
+            }
+        )
 
     def test_get_feature_columns(self):
         """Test feature column extraction."""

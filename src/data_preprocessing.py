@@ -6,6 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def load_and_clean_data(path):
     """
     Load and clean data with enhanced feature engineering.

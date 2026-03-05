@@ -5,6 +5,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def evaluate_model(model, X_test, y_test):
     """
     Evaluate model performance with multiple metrics.
@@ -28,14 +29,11 @@ def evaluate_model(model, X_test, y_test):
         # MAPE (Mean Absolute Percentage Error)
         mape = np.mean(np.abs((y_test - predictions) / y_test)) * 100
 
-        metrics = {
-            'mae': mae,
-            'rmse': rmse,
-            'r2': r2,
-            'mape': mape
-        }
+        metrics = {"mae": mae, "rmse": rmse, "r2": r2, "mape": mape}
 
-        logger.info(f"Model Evaluation - MAE: {mae:.2f}, RMSE: {rmse:.2f}, R²: {r2:.4f}, MAPE: {mape:.2f}%")
+        logger.info(
+            f"Model Evaluation - MAE: {mae:.2f}, RMSE: {rmse:.2f}, R²: {r2:.4f}, MAPE: {mape:.2f}%"
+        )
 
         return metrics
 

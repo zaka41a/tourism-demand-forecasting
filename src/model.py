@@ -8,12 +8,22 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 def get_feature_columns(df):
     """Get available feature columns based on dataframe."""
     base_features = ["temperature", "is_holiday", "price", "month", "day_of_week"]
-    optional_features = ["quarter", "is_weekend", "week_of_year",
-                        "month_sin", "month_cos", "day_sin", "day_cos",
-                        "bookings_lag_7", "bookings_lag_30", "bookings_rolling_7"]
+    optional_features = [
+        "quarter",
+        "is_weekend",
+        "week_of_year",
+        "month_sin",
+        "month_cos",
+        "day_sin",
+        "day_cos",
+        "bookings_lag_7",
+        "bookings_lag_30",
+        "bookings_rolling_7",
+    ]
 
     features = base_features.copy()
     for feat in optional_features:
@@ -56,12 +66,12 @@ def train_model(df, optimize=False):
                 min_samples_split=5,
                 min_samples_leaf=2,
                 random_state=42,
-                n_jobs=-1
+                n_jobs=-1,
             )
             model.fit(X_train, y_train)
 
         # Cross-validation score
-        cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='r2')
+        cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring="r2")
         logger.info(f"Cross-validation R² scores: {cv_scores}")
         logger.info(f"Mean CV R²: {cv_scores.mean():.4f} (+/- {cv_scores.std() * 2:.4f})")
 
@@ -85,21 +95,16 @@ def optimize_model(X_train, y_train):
     """
     try:
         param_grid = {
-            'n_estimators': [100, 200, 300],
-            'max_depth': [10, 15, 20, None],
-            'min_samples_split': [2, 5, 10],
-            'min_samples_leaf': [1, 2, 4]
+            "n_estimators": [100, 200, 300],
+            "max_depth": [10, 15, 20, None],
+            "min_samples_split": [2, 5, 10],
+            "min_samples_leaf": [1, 2, 4],
         }
 
         rf = RandomForestRegressor(random_state=42, n_jobs=-1)
 
         grid_search = GridSearchCV(
-            estimator=rf,
-            param_grid=param_grid,
-            cv=5,
-            scoring='r2',
-            n_jobs=-1,
-            verbose=1
+            estimator=rf, param_grid=param_grid, cv=5, scoring="r2", n_jobs=-1, verbose=1
         )
 
         logger.info("Running GridSearchCV (this may take a few minutes)...")
@@ -115,7 +120,7 @@ def optimize_model(X_train, y_train):
         raise
 
 
-def save_model(model, scaler=None, filepath='models/trained_model.pkl'):
+def save_model(model, scaler=None, filepath="models/trained_model.pkl"):
     """
     Save trained model and scaler to disk.
 
@@ -127,10 +132,7 @@ def save_model(model, scaler=None, filepath='models/trained_model.pkl'):
     try:
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
-        model_data = {
-            'model': model,
-            'scaler': scaler
-        }
+        model_data = {"model": model, "scaler": scaler}
 
         joblib.dump(model_data, filepath)
         logger.info(f"Model saved to {filepath}")
@@ -140,7 +142,7 @@ def save_model(model, scaler=None, filepath='models/trained_model.pkl'):
         raise
 
 
-def load_model(filepath='models/trained_model.pkl'):
+def load_model(filepath="models/trained_model.pkl"):
     """
     Load trained model and scaler from disk.
 
@@ -153,7 +155,7 @@ def load_model(filepath='models/trained_model.pkl'):
     try:
         model_data = joblib.load(filepath)
         logger.info(f"Model loaded from {filepath}")
-        return model_data['model'], model_data.get('scaler')
+        return model_data["model"], model_data.get("scaler")
 
     except FileNotFoundError:
         logger.error(f"Model file not found: {filepath}")
